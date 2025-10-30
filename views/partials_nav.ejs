@@ -1,0 +1,15 @@
+<nav class="nav">
+  <div class="left">
+    <a href="/dashboard" class="brand">Suporte TI – UNINORTE</a>
+    <% if (currentUser) { %>
+      <a href="/tickets">Chamados</a>
+      <a href="/tickets/new">Novo</a>
+    <% } %>
+  </div>
+  <div class="right">
+    <% if (currentUser) { %>
+      <span class="user">Olá, <b><%= currentUser.name %></b> (<%= currentUser.role %>)</span>
+      <a href="/logout">Sair</a>
+    <% } %>
+  </div>
+</nav>
