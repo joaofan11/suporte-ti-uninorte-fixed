@@ -1,0 +1,18 @@
+<nav class="nav">
+  <div class="left">
+    <a href="/dashboard" class="brand">Central de Suporte Técnico – UNINORTE</a>
+    <% if (currentUser) { %>
+      <a href="/tickets">Chamados</a>
+      <a href="/tickets/new">Novo</a>
+      <% if (currentUser.role === 'admin') { %>
+        <a href="/register">Cadastrar Usuário</a>
+      <% } %>
+    <% } %>
+  </div>
+  <div class="right">
+    <% if (currentUser) { %>
+      <span class="user">Olá, <b><%= currentUser.name %></b> (<%= currentUser.role %>)</span>
+      <a href="/logout">Sair</a>
+    <% } %>
+  </div>
+</nav>

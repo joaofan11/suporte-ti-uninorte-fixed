@@ -1,0 +1,52 @@
+<h2>Chamado #<%= ticket.id %> — <%= ticket.title %></h2>
+
+<div class="ticket">
+  <p><b>Status:</b> <%= ticket.status %></p>
+  <p><b>Prioridade:</b> <%= ticket.priority %></p>
+  <p><b>Autor:</b> <%= ticket.author?.name %> (<%= ticket.author?.email %>)</p>
+  <p><b>Descrição:</b></p>
+  <pre class="pre"><%= ticket.description %></pre>
+  <p><b>Criado em:</b> <%= new Date(ticket.createdAt).toLocaleString('pt-BR') %></p>
+</div>
+
+<% if (currentUser && currentUser.role === 'admin') { %>
+  <form method="post" action="/tickets/<%= ticket.id %>/status" class="form">
+    <label>Alterar status
+      <select name="status">
+        <option value="aberto" <%= ticket.status==='aberto'?'selected':'' %>>Aberto</option>
+        <option value="em_andamento" <%= ticket.status==='em_andamento'?'selected':'' %>>Em andamento</option>
+        
+<option value="resolvido" <%= ticket.status==='resolvido'?'selected':'' %>>Resolvido</option>
+        <option value="fechado" <%= ticket.status==='fechado'?'selected':'' %>>Fechado</option>
+      </select>
+    </label>
+    <button type="submit">Salvar</button>
+  </form>
+<% } %>
+
+<hr style="border:0; border-top:1px solid #e5e7eb; margin: 20px 0;">
+
+<h3>Comentários</h3>
+
+<% if (ticket.comments && ticket.comments.length > 0) { %>
+  <% ticket.comments.forEach(comment => { %>
+    <div class="card" style="margin-bottom: 12px;">
+      <p>
+        <b><%= comment.author?.name %></b> 
+        <span style="font-size: 12px; color: #64748b;">
+          em <%= new Date(comment.createdAt).toLocaleString('pt-BR') %>
+        </span>
+      </p>
+      <pre class="pre" style="background: #fff; padding: 0;"><%= comment.content %></pre>
+    </div>
+  <% }) %>
+<% } else { %>
+  <p>Nenhum comentário ainda.</p>
+<% } %>
+
+<form method="post" action="/tickets/<%= ticket.id %>/comments" class="form" style="margin-top: 20px;">
+  <label>Adicionar Comentário
+    <textarea name="content" rows="4" required></textarea>
+  </label>
+  <button type="submit">Enviar Comentário</button>
+</form>

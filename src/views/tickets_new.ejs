@@ -1,0 +1,25 @@
+<h2>Novo Chamado</h2>
+
+<% if (typeof error !== 'undefined') { %>
+  <div class="alert"><%= error %></div>
+<% } %>
+
+<form method="post" action="/tickets" class="form">
+  <label>Título
+    <input type="text" name="title" required>
+  </label>
+
+  <label>Descrição
+    <textarea name="description" rows="5" required></textarea>
+  </label>
+
+  <label>Prioridade
+    <select name="priority">
+      <option value="baixa">Baixa</option>
+      <option value="media">Média</option>
+      <option value="alta">Alta</option>
+    </select>
+  </label>
+
+  <button type="submit">Abrir Chamado</button>
+</form>
