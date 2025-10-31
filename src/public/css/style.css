@@ -45,3 +45,8 @@ a{color:#FF6B00;text-decoration:none}
   height: 30px; /* Ajuste esta altura conforme necessário */
   width: auto; /* Mantém a proporção */
 }
+
+.nav .left {
+  display: flex;
+  align-items: center;
+}
